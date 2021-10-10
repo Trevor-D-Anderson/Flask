@@ -1,0 +1,24 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+}
+h1{
+    background-color: burlywood;
+    color: crimson;
+    padding: 10px;
+}
+table{
+    border-spacing: 0px;
+}
+.boxes1{
+    background-color: crimson;
+    width: 50px;
+    height: 50px;
+}
+.boxes2{
+    background-color: black;
+    width: 50px;
+    height: 50px;
+}
