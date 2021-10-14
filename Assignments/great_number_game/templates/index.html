@@ -1,15 +1,56 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Title</title>
+    <title>Great Number Game</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-    
+<body class="d-flex flex-column align-items-center">
+    <header>
+        <h1 class="bg-white p-1 border rounded h1">It's The Great Number Game</h1>
+        <div class="text-left bg-secondary text-white div1">
+            <h4>Here's how this works:</h4>
+            <h4>You get 5 guesses to guess the number between 1-100.</h4>
+            <h4>We will tell you high or low and you get to guess again.</h4>
+            <h4>If you can't guess the right number within 5 guesses you lose.</h4>
+            <h4>Lastly, Have Fun!</h4>
+        </div>
+    </header>
+    <main class="d-flex flex-column justify-content-center">
+        {% if session['value'] == "Win": %}
+            <div class='p-4 m-2 bg-success text-center'>
+                <h3>You Win!</h3>
+                <h3>{{ session['guess'] }} Was right!</h3>
+            </div>
+        {% elif session['value'] == "High": %}
+            <div class='p-4 m-2 bg-warning text-center'>
+                <h3>You guessed too high</h3>
+                <h3>{{ session['guesses'] }}</h3>
+            </div>
+        {% elif session['value'] == "Low": %}
+            <div class='p-4 m-2 bg-warning text-center'>
+                <h3>You guessed too low</h3>
+                <h3>{{ session['guesses'] }}</h3>
+            </div>
+        {% endif %}
+        <!-- <div class="p-4 m-2 bg-success text-center"><h3>You Win!</h3></div> -->
+        <div>
+            <form class="m-3 bg-secondary p-3" action="/check" method="post">
+                <label class="text-white font-weight-bold" for="check">Guess Here:</label>
+                <input type="text" name="check">
+                <button class="btn btn-success rounded" type="submit">Check Number</button>
+            </form>
+        </div>
+        <div class="text-center">
+            <form action="/Reset" method="post">
+                <button class="btn btn-info" type="submit">Click Here to Reset</button>
+            </form>
+        </div>
+    </main>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
