@@ -5,23 +5,28 @@ app.secret_key = 'Great Numbers!'
 
 @app.route('/')
 def index():
-    if 'guess' and 'guesses' in session:
+    if 'guess' in session:
         print('key exists!')
     else:
         session['guess'] = random.randrange(1,100)
         session['guesses'] = []
+        session['user'] = []
+        session['guessNumber'] = []
         print("key 'guess' was just made")
     return render_template("index.html")
 
 @app.route('/Reset', methods=['POST'])
 def reset():
-    session.clear()
+    session.pop('guess')
+    session.pop('guesses')
+    session.pop('value')
     return redirect('/')
 
 @app.route('/check', methods=['POST'])
 def check():
     if int(request.form['check']) == session['guess']:
         print("You Win!")
+        session['guesses'].append(int(request.form['check']))
         session['value'] = "Win"
         return redirect('/leaderboard')
     if len(session['guesses']) >= 4:
@@ -40,11 +45,19 @@ def check():
 
 @app.route('/leaderboard')
 def leaderboard():
-    return render_template("leaderboard.html")
+    names = session['user']
+    guessNumber = session['guessNumber']
+    return render_template("leaderboard.html", names=names, guesses=guessNumber)
 
-@app.route('/leadername')
+@app.route('/leadername', methods=["POST"])
 def leaderName():
-    
+    print(request.form['name'])
+    print(len(session['guesses']))
+    session['user'].append(request.form['name'])
+    session['guessNumber'].append(len(session['guesses']))
+    print(session['user'])
+    print(session['guessNumber'])
+    return redirect('/leaderboard')
 
 
 if __name__=="__main__":   

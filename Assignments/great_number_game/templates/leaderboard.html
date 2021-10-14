@@ -35,11 +35,12 @@
                     <th> Guesses:</th>
                 </tr>
                 <tr>
-                    {% for user in users: %}
-                    <tr>
-                        <td>{{ user['name'] }}</td>
-                        <td>{{ user['guessNumber'] }}</td>
-                    </tr>
+                    {% for user in names: %}
+                    <p>1</p>
+                        <tr>
+                            <td>{{ user['name'] }}</td>
+                            <td>{{ guess['user'] }}</td>
+                        </tr>
                     {% endfor %}
                 </tr>
             </table>
