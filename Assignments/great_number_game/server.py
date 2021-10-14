@@ -28,7 +28,7 @@ def check():
         print("You Win!")
         session['guesses'].append(int(request.form['check']))
         session['value'] = "Win"
-        return redirect('/leaderboard')
+        return redirect('/')
     if len(session['guesses']) >= 4:
         session['value'] == 'Lose'
         return redirect('https://www.youtube.com/watch?v=QUzvs6gdrbo&ab_channel=Vidmanheart')
