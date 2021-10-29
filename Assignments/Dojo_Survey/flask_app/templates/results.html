@@ -11,16 +11,10 @@
 </head>
 <body class="d-flex flex-column align-items-center text-white">
     <div class="mt-5 bg-secondary rounded d-flex flex-column text-left p-2">
-        <h1 class="text-warning">{{ session['name'] }}</h1>
-        <h3>Location: {{ session['location'] }}</h3>
-        <h3>Favorite Language: {{ session['favLang'] }}</h3>
-        <h3>Comments: {{ session['comments'] }}</h3>
-        
-        <h3>Favorite Time to Code: 
-            {% for x in checks: %}
-                {{ x }} 
-            {% endfor %}
-        </h3>
+        <h1 class="text-warning">{{ survey.name }}</h1>
+        <h3>Location: {{ survey.location }}</h3>
+        <h3>Favorite Language: {{ survey.language }}</h3>
+        <h3>Comments: {{ survey.comment }}</h3>
     </div>
     <form action="/return" method="post">
         <button type="submit">Go Home</button>

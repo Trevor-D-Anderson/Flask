@@ -11,6 +11,13 @@
 <body class="d-flex justify-content-center text-center text-white">
     <div class="p-4 mt-5 bg-secondary rounded d-flex flex-column text-left">
         <h1 class="text-warning">Dojo Survey</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <form action="/process" method="post">
         <div class="m-1">
             <label for="name">Name:</label><br>
@@ -20,27 +27,27 @@
             <label for="location">Dojo Location:</label><br>
             <select class="rounded w-100" name="location">
                 <option selected>--Select a Location--</option>
-                <option>Chicago</option>
-                <option>Seattle</option>
-                <option>Online</option>
-                <option>Burbank</option>
-                <option>Bellevue</option>
+                <option value="Chicago"> Chicago</option>
+                <option value="Seattle">Seattle</option>
+                <option value="Online">Online</option>
+                <option value="Burbank">Burbank</option>
+                <option value="Bellevue">Bellevue</option>
             </select>
         </div>
         <div class="m-1">
             <label for="favLang">Favorite Language:</label><br>
-            <select class="rounded w-100" name="favLang">
+            <select class="rounded w-100" name="language">
                 <option selected>--Select a Language--</option>
-                <option>C#</option>
-                <option>CSS</option>
-                <option>Java</option>
-                <option>JavaScript</option>
-                <option>Python</option>
+                <option value="C#">C#</option>
+                <option value="CSS">CSS</option>
+                <option value="Java">Java</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="Python">Python</option>
             </select>
         </div>
         <div class="m-1">
             <label for="comments w-100">Comments:</label><br>
-            <input class="rounded w-100" type="textarea" name='comments'>
+            <input class="rounded w-100" type="textarea" name='comment'>
         </div>
         <div>
             <h5>Select your favorite time to Code:</h5>

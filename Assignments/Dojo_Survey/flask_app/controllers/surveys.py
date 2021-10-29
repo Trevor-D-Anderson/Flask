@@ -8,18 +8,22 @@ def index():
 
 @app.route("/process", methods=['POST'])
 def form():
-    print(request.form.getlist('check'))
-    session['name'] = request.form.get('name')
-    session['location'] = request.form.get('location')
-    session['favLang'] = request.form.get('favLang')
-    session['comments'] = request.form.get('comments')
-    session['check'] = request.form.getlist('check')
+
+    if not Survey.validate_survey(request.form):
+        return redirect('/')
+    
+    data = {
+    "name": request.form['name'],
+    "location": request.form['location'],
+    "language": request.form['language'],
+    "comment": request.form['comment']
+    }
+    Survey.new_survey(data)
     return redirect('/result')
 
 @app.route('/result')
 def results():
-    checks = session['check']
-    return render_template('results.html', checks=checks)
+    return render_template('results.html', survey=Survey.get_survey())
 
 @app.route('/return', methods=['POST'])
 def goHome():
